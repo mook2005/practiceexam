@@ -6,7 +6,7 @@ services:
       - "5000:5000"
     depends_on:
       - db
-    volumns:
+    volumes:
       - ./app:/app
     command: ["sh", "script.sh"]
 
@@ -15,7 +15,7 @@ services:
     image: mysql
     ports:
       - "3306:3306"
-    volumns:
+    volumes:
       - ./db:/docker-entrypoint-initdb.d
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
