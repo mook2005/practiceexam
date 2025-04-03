@@ -1,6 +1,6 @@
 services:
   web:
-    image: python:3.9
+    image: python
     ports:
       - "5000:5000"
     working_dir: /app
@@ -23,4 +23,3 @@ services:
       - MYSQL_ROOT_PASSWORD=rootpassword
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      start_period: 5s
