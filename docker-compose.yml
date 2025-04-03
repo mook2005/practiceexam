@@ -1,25 +1,24 @@
 services:
-  web:
-    image: python
-    ports:
-      - "5000:5000"
-    working_dir: /app
-    volumes:
-      - ./app:/app
-    command: ["sh", "script.sh"]
-    depends_on:
-      db:
-        condition: service_healthy
+    web:
+      image: python
+      ports:
+        - "5000:5000"
+      depends_on:
+        db:
+          condition: service_healthy
+      working_dir: /app
+      volumes:
+        - ./app:/app
 
-  db:
-    container_name: db_server
-    image: mysql
-    ports:
-      - "3306:3306"
-    working_dir: /db
-    volumes:
-      - ./db:/docker-entrypoint-initdb.d
-    environment:
-      - MYSQL_ROOT_PASSWORD=rootpassword
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+    db:
+      image: mysql
+      ports:
+        - "3306:3306"
+      container_name: db_server
+      working_dir: /db
+      volumes:
+        - ./db:./docker-entrypoint-initdb.d
+      environment:
+        - MYSQL_ROOT_PASSWORD=rootpassword
+      healthcheck:
+        test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
