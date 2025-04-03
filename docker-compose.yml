@@ -1,20 +1,21 @@
 services:
   web:
-    working_dir: /app
     image: python
     ports:
       - "5000:5000"
-    depends_on:
-      - db
+    working_dir: /app
     volumes:
       - ./app:/app
     command: ["sh", "script.sh"]
+    depends_on:
+      db:
+        condition: service_healthy
 
   db:
-    working_dir: /db
     image: mysql
     ports:
       - "3306:3306"
+    working_dir: /db
     volumes:
       - ./db:/docker-entrypoint-initdb.d
     environment:
