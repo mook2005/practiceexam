@@ -2,7 +2,7 @@ services:
   web:
     working_dir: /app
     image: python
-    port:
+    ports:
       - "5000:5000"
     depends_on:
       - db
@@ -13,8 +13,8 @@ services:
   db:
     working_dir: /db
     image: mysql
-    port:
-      - "3307:3306"
+    ports:
+      - "3306:3306"
     volumns:
       - ./db:/docker-entrypoint-initdb.d
     environment:
